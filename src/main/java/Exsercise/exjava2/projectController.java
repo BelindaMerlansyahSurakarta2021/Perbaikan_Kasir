@@ -19,13 +19,13 @@ public class projectController {
     @RequestMapping("/input")
     public String getData(HttpServletRequest data, Model discountprocess){
         
-        String inputname = data.getParameter("var_name");
+        String inputname = data.getParameter("name");
         
-        String inputprice = data.getParameter("var_price");
+        String inputprice = data.getParameter("price");
         
-        String inputquantity = data.getParameter("var_quantity");
+        String inputquantity = data.getParameter("qty");
         
-        String inputMoney = data.getParameter("var_money");
+        String inputMoney = data.getParameter("money");
         
         String keterangan = data.getParameter("ket");
         
@@ -60,14 +60,19 @@ public class projectController {
         Double kembali = iMoney - getTotal;
         Double kurang = getTotal - iMoney;
         
-        if (iMoney < iTotal)
+        if (iMoney < getTotal)
         {
-            keterangan = "Kembalian anda Rp. " + kembali;
+            keterangan = "uang anda kurang  Rp. " + kurang;
         }
         
-        else if (iMoney > iTotal)
+        else if (iMoney > getTotal)
         {
-            keterangan = "Uang anda kurang Rp. " + kurang;
+            keterangan = "Uang anda kembali Rp. " + kembali;
+        }
+        
+        else
+        {
+            keterangan = "Uang anda pas";
         }
                 
         discountprocess.addAttribute("name", inputname);
